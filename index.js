@@ -23,6 +23,7 @@ class Player {
     update() {
         this.draw()
         this.position.y += this.velocity.y
+        this.position.x += this.velocity.x
         if (this.position.y + this.height + this.velocity.y < canvas.height){
             this.velocity.y += gravity
         } else {
@@ -40,6 +41,15 @@ const player2 = new Player({
     y: 100,
 })
 
+const keys = {
+    d: {
+        pressed: false
+    },
+    a: {
+        pressed: false
+    },
+}
+
 
 function animate() {
     window.requestAnimationFrame(animate)
@@ -49,14 +59,58 @@ function animate() {
     
     player.update()
     player2.update()
+
+    player.velocity.x = 0
+    if (keys.d.pressed) player.velocity.x = 5 
+    else if (keys.a.pressed) player.velocity.x = -5
     // console.log('go')
+    console
 }
 
 animate()
-
 window.addEventListener('keydown', (e)=>{
-    if (e.key == 'd' or 39) {
-        
+    console.log(e)
+    switch (e.key) {
+        case 'd':
+            keys.d.pressed = true
+            // console.log("Right key is pressed.");
+            break
+        case 'ArrowRight':
+            keys.d.pressed = true
+            // console.log("Right key is pressed.");
+            break
+        case 'a':
+            keys.a.pressed = true
+            break
+        case 'ArrowLeft':
+            keys.a.pressed = true
+            break
+        case 'w':
+            player.velocity.y = -10
+            break
+        case 'ArrowUp':
+            player.velocity.y = -10
+            break
+    }
+})
+
+window.addEventListener('keyup', (e)=>{
+    console.log(e)
+    switch (e.key) {
+        case 'd':
+            keys.d.pressed = false
+            // console.log("Right key is pressed.");
+            break
+        case 'ArrowRight':
+            keys.d.pressed = false
+            // console.log("Right key is pressed.");
+            break
+        case 'a':
+            keys.a.pressed = false
+            break
+        case 'ArrowLeft':
+            keys.a.pressed = false
+            break 
     }
 })
 
