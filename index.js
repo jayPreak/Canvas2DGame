@@ -1,5 +1,7 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
+//124x68 tiles
+console.log(floorCollisions)
 
 canvas.width = 1024
 canvas.height = 576
@@ -25,6 +27,7 @@ class Sprite {
         this.draw()
     }
 }
+
 
 class Player {
     constructor(position) {
@@ -102,7 +105,7 @@ function animate() {
 
 animate()
 window.addEventListener('keydown', (e)=>{
-    console.log(e)
+    // console.log(e)
     switch (e.key) {
         case 'd':
             keys.d.pressed = true
@@ -128,7 +131,7 @@ window.addEventListener('keydown', (e)=>{
 })
 
 window.addEventListener('keyup', (e)=>{
-    console.log(e)
+    // console.log(e)
     switch (e.key) {
         case 'd':
             keys.d.pressed = false
