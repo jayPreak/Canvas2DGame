@@ -1,7 +1,14 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 //124x68 tiles
-console.log(floorCollisions)
+// console.log(floorCollisions)
+const floorCollisions2D = []
+for (let i = 0; i< floorCollisions.length; i += 124) {
+    floorCollisions2D.push(floorCollisions.slice(i, i+124))
+}
+
+
+// console.log(floorCollisions2D)
 
 canvas.width = 1024
 canvas.height = 576
