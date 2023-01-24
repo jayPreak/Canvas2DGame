@@ -6,7 +6,13 @@ const floorCollisions2D = []
 for (let i = 0; i< floorCollisions.length; i += 124) {
     floorCollisions2D.push(floorCollisions.slice(i, i+124))
 }
-
+floorCollisions2D.forEach((row) => {
+    row.forEach((symbol) => {
+        if (symbol == 8433) {
+            console.log('drawe here')
+        }
+    })
+})
 
 // console.log(floorCollisions2D)
 
@@ -18,50 +24,10 @@ const scaledCanvas = {
 }
 const gravity = 0.5
 
-class Sprite {
-    constructor({position, imageSrc}) {
-        this.position = position
-        this.image = new Image()
-        this.image.src = imageSrc
-    }
-
-    draw() {
-        if(!this.image) return
-        c.drawImage(this.image, this.position.x, this.position.y)
-    }
-
-    update() {
-        this.draw()
-    }
-}
 
 
-class Player {
-    constructor(position) {
-        this.position = position
-        this.velocity = {
-            x:0,
-            y:1,
-        }
-        this.height = 100
-    }
 
-    draw() {
-        c.fillStyle = 'red'
-        c.fillRect(this.position.x, this.position.y, 100, 100)
-    }
 
-    update() {
-        this.draw()
-        this.position.y += this.velocity.y
-        this.position.x += this.velocity.x
-        if (this.position.y + this.height + this.velocity.y < canvas.height){
-            this.velocity.y += gravity
-        } else {
-            this.velocity.y=0
-        }
-    }
-}
 
 const player = new Player({
     x: 0,
