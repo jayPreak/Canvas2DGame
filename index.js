@@ -1,6 +1,7 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 //124x68 tiles
+//16x16
 // console.log(floorCollisions)
 const floorCollisions2D = []
 for (let i = 0; i< floorCollisions.length; i += 124) {
