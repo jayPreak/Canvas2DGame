@@ -11,7 +11,7 @@ const collisionBlocks = []
 floorCollisions2D.forEach((row, y) => {
     row.forEach((symbol, x) => {
         if (symbol == 8433) {
-            console.log('drawe here')
+            // console.log('drawe here')
             collisionBlocks.push(
                 new CollisionBlock({
                     position: {
@@ -24,7 +24,29 @@ floorCollisions2D.forEach((row, y) => {
     })
 })
 
-console.log(collisionBlocks)
+const platformCollisions2D = []
+for (let i = 0; i< platformCollisions.length; i += 124) {
+    platformCollisions2D.push(platformCollisions.slice(i, i+124))
+}
+
+const platformCollisionBlocks = []
+platformCollisions2D.forEach((row, y) => {
+    row.forEach((symbol, x) => {
+        if (symbol == 8433) {
+            // console.log('drawe here')
+            platformCollisionBlocks.push(
+                new CollisionBlock({
+                    position: {
+                        x: x * 16,
+                        y: y * 16,
+                    }
+                })
+            )
+        }
+    })
+})
+
+// console.log(collisionBlocks)
 
 // console.log(floorCollisions2D)
 
@@ -42,13 +64,16 @@ const gravity = 0.5
 
 
 const player = new Player({
-    x: 0,
-    y: 0,
+    position: {
+        x: 500,
+        y: 0,
+    },
+    collisionBlocks : collisionBlocks,
 })
-const player2 = new Player({
-    x: 300,
-    y: 100,
-})
+// const player2 = new Player({
+//     x: 300,
+//     y: 100,
+// })
 
 const keys = {
     d: {
@@ -80,12 +105,15 @@ function animate() {
     collisionBlocks.forEach((collisionBlock)=> {
         collisionBlock.update()
     })
+    platformCollisionBlocks.forEach((block)=> {
+        block.update()
+    })
     c.restore()
 
     
 
     player.update()
-    player2.update()
+    // player2.update()
 
     player.velocity.x = 0
     if (keys.d.pressed) player.velocity.x = 5 
