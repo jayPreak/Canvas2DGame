@@ -7,13 +7,24 @@ const floorCollisions2D = []
 for (let i = 0; i< floorCollisions.length; i += 124) {
     floorCollisions2D.push(floorCollisions.slice(i, i+124))
 }
-floorCollisions2D.forEach((row) => {
-    row.forEach((symbol) => {
+const collisionBlocks = []
+floorCollisions2D.forEach((row, y) => {
+    row.forEach((symbol, x) => {
         if (symbol == 8433) {
             console.log('drawe here')
+            collisionBlocks.push(
+                new CollisionBlock({
+                    position: {
+                        x: x * 16,
+                        y: y * 16,
+                    }
+                })
+            )
         }
     })
 })
+
+console.log(collisionBlocks)
 
 // console.log(floorCollisions2D)
 
@@ -66,7 +77,13 @@ function animate() {
     c.scale(1.5, 1.5)
     c.translate(0, -background.image.height + scaledCanvas.height)
     background.update()
+    collisionBlocks.forEach((collisionBlock)=> {
+        collisionBlock.update()
+    })
     c.restore()
+
+    
+
     player.update()
     player2.update()
 
