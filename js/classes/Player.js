@@ -5,8 +5,9 @@ class Player {
             x:0,
             y:1,
         }
-        this.height = 100
+        
         this.width = 100
+        this.height = 100 
         this.collisionBlocks = collisionBlocks
     }
 
@@ -37,12 +38,20 @@ class Player {
             const collisionBlock = this.collisionBlocks[i]
 
             if (
-                collision({
-                    object1: this,
-                    object2: collisionBlock,
-                })
+                this.position.y + this.height >= collisionBlock.position.y && 
+                this.position.y <= collisionBlock.position.y + collisionBlock.height &&
+                this.position.x <= collisionBlock.position.x + collisionBlock.width &&
+                this.position.x + this.width >= collisionBlock.position.x
+                // collision({
+                //     this: this,
+                //     collisionBlock: collisionBlock,
+                // })
             ) {
                 console.log("we r colliding")
+                if (this.velocity.y > 0) {
+                    this.velocity.y = 0
+                    // this.position.y = 
+                }
             }
 
         }

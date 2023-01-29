@@ -50,8 +50,8 @@ platformCollisions2D.forEach((row, y) => {
 
 // console.log(floorCollisions2D)
 
-canvas.width = 1024
-canvas.height = 576
+canvas.width = 1260
+canvas.height = 709
 const scaledCanvas = {
     width: canvas.width / 1.5,
     height: canvas.height / 1.5
@@ -65,10 +65,10 @@ const gravity = 0.5
 
 const player = new Player({
     position: {
-        x: 500,
+        x: 500/1.5,
         y: 0,
     },
-    collisionBlocks : collisionBlocks,
+    collisionBlocks,
 })
 // const player2 = new Player({
 //     x: 300,
@@ -108,18 +108,19 @@ function animate() {
     platformCollisionBlocks.forEach((block)=> {
         block.update()
     })
-    c.restore()
-
-    
-
     player.update()
     // player2.update()
 
     player.velocity.x = 0
     if (keys.d.pressed) player.velocity.x = 5 
     else if (keys.a.pressed) player.velocity.x = -5
+    c.restore()
+
+    
+
+    
     // console.log('go')
-    console
+    // console
 }
 
 animate()
