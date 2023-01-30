@@ -69,6 +69,7 @@ const player = new Player({
         y: 0,
     },
     collisionBlocks,
+    imageSrc: './assets/masteryi/Idle.png',
 })
 // const player2 = new Player({
 //     x: 300,
@@ -142,10 +143,10 @@ window.addEventListener('keydown', (e)=>{
             keys.a.pressed = true
             break
         case 'w':
-            player.velocity.y = -10
+            player.velocity.y = -9
             break
         case 'ArrowUp':
-            player.velocity.y = -10
+            player.velocity.y = -9
             break
     }
 })
