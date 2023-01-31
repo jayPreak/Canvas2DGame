@@ -66,6 +66,29 @@ const player = new Player({
   collisionBlocks,
   imageSrc: "./assets/masteryi/Idle.png",
   frameRate: 10,
+
+  animations: {
+    Idle: {
+      imageSrc: "./assets/masteryi/Idle.png",
+      frameRate: 10,
+      frameBuffer: 5,
+    },
+    Run: {
+      imageSrc: "./assets/masteryi/Run.png",
+      frameRate: 8,
+      frameBuffer: 6,
+    },
+    Jump: {
+      imageSrc: "./assets/masteryi/Going Up.png",
+      frameRate: 3,
+      frameBuffer: 3,
+    },
+    Fall: {
+      imageSrc: "./assets/masteryi/Going Down.png",
+      frameRate: 3,
+      frameBuffer: 3,
+    },
+  },
 });
 // const player2 = new Player({
 //     x: 300,
@@ -108,8 +131,20 @@ function animate() {
   // player2.update()
 
   player.velocity.x = 0;
-  if (keys.d.pressed) player.velocity.x = 5;
-  else if (keys.a.pressed) player.velocity.x = -5;
+  if (keys.d.pressed) {
+    player.switchSprite("Run");
+    player.velocity.x = 3;
+  } else if (keys.a.pressed) {
+    player.velocity.x = -3;
+  } else if (player.velocity.y === 0) {
+    player.switchSprite("Idle");
+  }
+
+  if (player.velocity.y < 0) {
+    player.switchSprite("Jump");
+  } else if (player.velocity.y > 0) {
+    player.switchSprite("Fall");
+  }
   c.restore();
 
   // console.log('go')
@@ -135,10 +170,10 @@ window.addEventListener("keydown", (e) => {
       keys.a.pressed = true;
       break;
     case "w":
-      player.velocity.y = -9;
+      player.velocity.y = -12;
       break;
     case "ArrowUp":
-      player.velocity.y = -9;
+      player.velocity.y = -12;
       break;
   }
 });
