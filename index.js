@@ -73,8 +73,18 @@ const player = new Player({
       frameRate: 10,
       frameBuffer: 5,
     },
-    Run: {
+    IdleL: {
+      imageSrc: "./assets/masteryi/IdleL.png",
+      frameRate: 10,
+      frameBuffer: 5,
+    },
+    RunR: {
       imageSrc: "./assets/masteryi/Run.png",
+      frameRate: 8,
+      frameBuffer: 6,
+    },
+    RunL: {
+      imageSrc: "./assets/masteryi/RunLeft.png",
       frameRate: 8,
       frameBuffer: 6,
     },
@@ -83,8 +93,18 @@ const player = new Player({
       frameRate: 3,
       frameBuffer: 3,
     },
+    JumpL: {
+      imageSrc: "./assets/masteryi/JumpLeft.png",
+      frameRate: 3,
+      frameBuffer: 3,
+    },
     Fall: {
       imageSrc: "./assets/masteryi/Going Down.png",
+      frameRate: 3,
+      frameBuffer: 3,
+    },
+    FallL: {
+      imageSrc: "./assets/masteryi/FallLeft.png",
       frameRate: 3,
       frameBuffer: 3,
     },
@@ -132,10 +152,13 @@ function animate() {
 
   player.velocity.x = 0;
   if (keys.d.pressed) {
-    player.switchSprite("Run");
-    player.velocity.x = 3;
+    player.switchSprite("RunR");
+    player.velocity.x = 4;
+    player.lastDirection = "right";
   } else if (keys.a.pressed) {
-    player.velocity.x = -3;
+    player.switchSprite("RunL");
+    player.velocity.x = -4;
+    player.lastDirection = "left";
   } else if (player.velocity.y === 0) {
     player.switchSprite("Idle");
   }
@@ -143,7 +166,11 @@ function animate() {
   if (player.velocity.y < 0) {
     player.switchSprite("Jump");
   } else if (player.velocity.y > 0) {
-    player.switchSprite("Fall");
+    if (player.lastDirection === "right") {
+      player.switchSprite("Fall");
+    } else {
+      player.switchSprite("FallL");
+    }
   }
   c.restore();
 
