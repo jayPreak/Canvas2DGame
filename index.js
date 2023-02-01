@@ -40,6 +40,7 @@ platformCollisions2D.forEach((row, y) => {
             x: x * 16,
             y: y * 16,
           },
+          height: 12,
         })
       );
     }
@@ -56,7 +57,7 @@ const scaledCanvas = {
   width: canvas.width / 1.5,
   height: canvas.height / 1.5,
 };
-const gravity = 0.5;
+const gravity = 0.25;
 
 const player = new Player({
   position: {
@@ -64,6 +65,7 @@ const player = new Player({
     y: 700,
   },
   collisionBlocks,
+  platformCollisionBlocks,
   imageSrc: "./assets/masteryi/Idle.png",
   frameRate: 10,
 
@@ -132,6 +134,13 @@ const background = new Sprite({
   imageSrc: "./assets/bg.png",
 });
 
+const camera = {
+  position: {
+    x: 0,
+    y: 0,
+  },
+};
+
 function animate() {
   window.requestAnimationFrame(animate);
 
@@ -139,7 +148,10 @@ function animate() {
   c.fillRect(0, 0, canvas.width, canvas.height);
   c.save();
   c.scale(1.5, 1.5);
-  c.translate(0, -background.image.height + scaledCanvas.height);
+  c.translate(
+    camera.position.x,
+    -background.image.height + scaledCanvas.height
+  );
   background.update();
   collisionBlocks.forEach((collisionBlock) => {
     collisionBlock.update();
@@ -155,16 +167,25 @@ function animate() {
     player.switchSprite("RunR");
     player.velocity.x = 4;
     player.lastDirection = "right";
+    player.shouldPanCameraToTheLeft();
   } else if (keys.a.pressed) {
     player.switchSprite("RunL");
     player.velocity.x = -4;
     player.lastDirection = "left";
   } else if (player.velocity.y === 0) {
-    player.switchSprite("Idle");
+    if (player.lastDirection === "right") {
+      player.switchSprite("Idle");
+    } else {
+      player.switchSprite("IdleL");
+    }
   }
 
   if (player.velocity.y < 0) {
-    player.switchSprite("Jump");
+    if (player.lastDirection === "right") {
+      player.switchSprite("Jump");
+    } else {
+      player.switchSprite("JumpL");
+    }
   } else if (player.velocity.y > 0) {
     if (player.lastDirection === "right") {
       player.switchSprite("Fall");
@@ -197,10 +218,10 @@ window.addEventListener("keydown", (e) => {
       keys.a.pressed = true;
       break;
     case "w":
-      player.velocity.y = -12;
+      player.velocity.y = -8;
       break;
     case "ArrowUp":
-      player.velocity.y = -12;
+      player.velocity.y = -8;
       break;
   }
 });
