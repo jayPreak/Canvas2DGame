@@ -179,12 +179,22 @@ function animate() {
     }
   }
 
+  player.countJump = 0;
+  player.hasJumped = "no";
+
   if (player.velocity.y < 0) {
-    player.shouldPanCameraDown({ canvas, camera });
-    if (player.lastDirection === "right") {
-      player.switchSprite("Jump");
-    } else {
-      player.switchSprite("JumpL");
+    if (player.hasJumped === "no") {
+      player.shouldPanCameraDown({ canvas, camera });
+      if (player.lastDirection === "right") {
+        player.switchSprite("Jump");
+        player.countJump += 1;
+      } else {
+        player.switchSprite("JumpL");
+        player.countJump += 1;
+      }
+    }
+    if (player.countJump === 2) {
+      player.hasJumped = "yes";
     }
   } else if (player.velocity.y > 0) {
     player.shouldPanCameraUp({ canvas, camera });

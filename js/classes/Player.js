@@ -29,6 +29,8 @@ class Player extends Sprite {
     };
     this.animations = animations;
     this.lastDirection = "right";
+    this.hasJumped = "no";
+    this.countJump = 2;
 
     for (let key in this.animations) {
       const image = new Image();
