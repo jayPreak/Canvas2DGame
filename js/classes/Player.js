@@ -72,7 +72,10 @@ class Player extends Sprite {
   }
 
   checkForHorizontalCanvasCollisions() {
-    if (this.hitbox.position.x + this.hitbox.width + this.velocity.x >= 1984) {
+    if (
+      this.hitbox.position.x + this.hitbox.width + this.velocity.x >= 1984 ||
+      this.hitbox.position.x + this.velocity.x <= 0
+    ) {
       this.velocity.x = 0;
     }
   }

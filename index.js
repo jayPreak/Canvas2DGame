@@ -159,6 +159,7 @@ function animate() {
   platformCollisionBlocks.forEach((block) => {
     block.update();
   });
+  player.checkForHorizontalCanvasCollisions();
   player.update();
   // player2.update()
 
