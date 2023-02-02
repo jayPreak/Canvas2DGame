@@ -172,6 +172,7 @@ function animate() {
     player.switchSprite("RunL");
     player.velocity.x = -4;
     player.lastDirection = "left";
+    player.shouldPanCameraToTheRight({ canvas, camera });
   } else if (player.velocity.y === 0) {
     if (player.lastDirection === "right") {
       player.switchSprite("Idle");

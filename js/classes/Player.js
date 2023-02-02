@@ -71,12 +71,29 @@ class Player extends Sprite {
     };
   }
 
+  checkForHorizontalCanvasCollisions() {
+    if (this.hitbox.position.x + this.hitbox.width + this.velocity.x >= 1984) {
+      this.velocity.x = 0;
+    }
+  }
+
   shouldPanCameraToTheLeft({ canvas, camera }) {
     const cameraboxRightSide = this.camerabox.position.x + this.camerabox.width;
     const scaledDownCanvasWidth = canvas.width / 1.5;
-
-    if (cameraboxRightSide >= scaledDownCanvasWidth) {
+    if (cameraboxRightSide >= 1984) return;
+    if (
+      cameraboxRightSide >=
+      scaledDownCanvasWidth + Math.abs(camera.position.x)
+    ) {
       // console.log("traslatetoleft");
+      camera.position.x -= this.velocity.x;
+    }
+  }
+
+  shouldPanCameraToTheRight({ canvas, camera }) {
+    if (this.camerabox.position.x <= 0) return;
+
+    if (this.camerabox.position.x <= Math.abs(camera.position.x)) {
       camera.position.x -= this.velocity.x;
     }
   }
