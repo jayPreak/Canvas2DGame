@@ -71,12 +71,13 @@ class Player extends Sprite {
     };
   }
 
-  shouldPanCameraToTheLeft() {
+  shouldPanCameraToTheLeft({ canvas, camera }) {
     const cameraboxRightSide = this.camerabox.position.x + this.camerabox.width;
     const scaledDownCanvasWidth = canvas.width / 1.5;
 
     if (cameraboxRightSide >= scaledDownCanvasWidth) {
-      console.log("traslatetoleft");
+      // console.log("traslatetoleft");
+      camera.position.x -= this.velocity.x;
     }
   }
 
