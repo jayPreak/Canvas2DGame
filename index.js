@@ -150,12 +150,12 @@ function animate() {
   c.scale(1.5, 1.5);
   c.translate(camera.position.x, camera.position.y);
   background.update();
-  collisionBlocks.forEach((collisionBlock) => {
-    collisionBlock.update();
-  });
-  platformCollisionBlocks.forEach((block) => {
-    block.update();
-  });
+  // collisionBlocks.forEach((collisionBlock) => {
+  //   collisionBlock.update();
+  // });
+  // platformCollisionBlocks.forEach((block) => {
+  //   block.update();
+  // });
   player.checkForHorizontalCanvasCollisions();
   player.update();
   // player2.update()
