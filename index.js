@@ -137,7 +137,7 @@ const background = new Sprite({
 const camera = {
   position: {
     x: 0,
-    y: 0,
+    y: -1088 + scaledCanvas.height,
   },
 };
 
@@ -148,10 +148,7 @@ function animate() {
   c.fillRect(0, 0, canvas.width, canvas.height);
   c.save();
   c.scale(1.5, 1.5);
-  c.translate(
-    camera.position.x,
-    -background.image.height + scaledCanvas.height
-  );
+  c.translate(camera.position.x, camera.position.y);
   background.update();
   collisionBlocks.forEach((collisionBlock) => {
     collisionBlock.update();
@@ -183,6 +180,7 @@ function animate() {
   }
 
   if (player.velocity.y < 0) {
+    player.shouldPanCameraDown({ canvas, camera });
     if (player.lastDirection === "right") {
       player.switchSprite("Jump");
     } else {
