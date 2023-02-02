@@ -102,7 +102,24 @@ class Player extends Sprite {
   }
 
   shouldPanCameraDown({ canvas, camera }) {
+    if (this.camerabox.position.y + this.velocity.y <= 0) return;
     if (this.camerabox.position.y <= Math.abs(camera.position.y)) {
+      camera.position.y -= this.velocity.y;
+    }
+  }
+
+  shouldPanCameraUp({ canvas, camera }) {
+    if (
+      this.camerabox.position.y + this.camerabox.height + this.velocity.y >=
+      1088
+    )
+      return;
+    const scaledCanvasHeight = canvas.height / 1.5;
+
+    if (
+      this.camerabox.position.y + this.camerabox.height >=
+      Math.abs(camera.position.y) + scaledCanvasHeight
+    ) {
       camera.position.y -= this.velocity.y;
     }
   }
