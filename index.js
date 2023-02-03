@@ -50,9 +50,9 @@ platformCollisions2D.forEach((row, y) => {
 // console.log(collisionBlocks)
 
 // console.log(floorCollisions2D)
-
-canvas.width = 1260;
-canvas.height = 709;
+// /1260 x 709
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 const scaledCanvas = {
   width: canvas.width / 1.5,
   height: canvas.height / 1.5,
