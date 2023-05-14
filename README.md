@@ -2,7 +2,7 @@
 
 <div align="center">
 
-### ❤️ Hosted  [Here](https://gaymge.vercel.app/) 🥰
+### ❤️ Hosted  [Here](https://jayjourney.vercel.app/) 🥰
 
 </div>
 
